@@ -18,11 +18,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::prefix('/users/')->group(function () {
+Route::middleware('admin')->prefix('/users/')->group(function () {
     Route::get('edit/{id}', 'UserController@edit')->name('users/edit');
 });
 
-Route::prefix('/positions/')->group(function () {
+Route::middleware('admin')->prefix('/positions/')->group(function () {
     Route::get('index', 'PositionController@index')->name('positions/index');
     Route::get('create', 'PositionController@create')->name('positions/create');
     Route::post('store', 'PositionController@store')->name('positions/store');
@@ -30,7 +30,7 @@ Route::prefix('/positions/')->group(function () {
     Route::post('update', 'PositionController@update')->name('positions/update');
 });
 
-Route::prefix('/skills/')->group(function () {
+Route::middleware('admin')->prefix('/skills/')->group(function () {
     Route::get('index', 'SkillController@index')->name('skills/index');
     Route::get('create', 'SkillController@create')->name('skills/create');
     Route::post('store', 'SkillController@store')->name('skills/store');
