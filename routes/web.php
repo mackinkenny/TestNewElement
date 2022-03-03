@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::middleware('admin')->prefix('/users/')->group(function () {
     Route::get('edit/{id}', 'UserController@edit')->name('users/edit');
+    Route::post('update', 'UserController@update')->name('users/update');
 });
 
 Route::middleware('admin')->prefix('/positions/')->group(function () {

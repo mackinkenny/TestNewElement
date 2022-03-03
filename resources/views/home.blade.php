@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10 rounded p-3 bg-white">
+            <div class="mb-2">
+                <h3 class="mb-0">Employees</h3>
+            </div>
             <table class="w-100">
                 <thead class="list-header">
                 <tr class="border-bottom">
@@ -77,7 +80,7 @@
                             @if($user->skills)
                                 <div class="py-2 px-2">
                                 @foreach($user->skills as $skill)
-                                    <span class="ml-3">{{$skill->name}}</span>
+                                    <p class="mb-0">{{$skill->name}}{{$loop->last ? '' : ', '}}</p>
                                 @endforeach
                                 </div>
                             @endif
