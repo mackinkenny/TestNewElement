@@ -9,7 +9,7 @@
                 <tr class="border-bottom">
                     <th>
                         <div class="py-2 px-2 text-left text-uppercase font-weight-normal">
-                            <span class="ml-3">ФИО</span>
+                            <span class="ml-3">Name</span>
                         </div>
                     </th>
                     @auth
@@ -20,20 +20,27 @@
                     </th>
                     <th>
                         <div class="py-2 px-2 text-left text-uppercase font-weight-normal">
-                            <span class="ml-3">Телефон</span>
+                            <span class="ml-3">Phone</span>
                         </div>
                     </th>
                     @endauth
                     <th>
                         <div class="py-2 px-2 text-left text-uppercase font-weight-normal">
-                            <span class="ml-3">Должность</span>
+                            <span class="ml-3">Position</span>
                         </div>
                     </th>
                     <th>
                         <div class="py-2 px-2 text-left text-uppercase font-weight-normal">
-                            <span class="ml-3">Навыки</span>
+                            <span class="ml-3">Skills</span>
                         </div>
                     </th>
+                    @if(Auth::check() && Auth::user()->role->name == 'Admin')
+                        <th>
+                            <div class="py-2 px-2 text-left text-uppercase font-weight-normal">
+                                <span class="ml-3">Action</span>
+                            </div>
+                        </th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -49,6 +56,7 @@
                                 <span class="ml-3">{{$user->name}}</span>
                             </div>
                         </td>
+                        @auth
                         <td>
                             <div class="py-2 px-2">
                                 <span class="ml-3">{{$user->email}}</span>
@@ -58,6 +66,28 @@
                             <div class="py-2 px-2">
                                 <span class="ml-3">{{$user->phone}}</span>
                             </div>
+                        </td>
+                        @endauth
+                        <td>
+                            <div class="py-2 px-2">
+                                <span class="ml-3">{{$user->position ? $user->position->name : ''}}</span>
+                            </div>
+                        </td>
+                        <td>
+                            @if($user->skills)
+                                <div class="py-2 px-2">
+                                @foreach($user->skills as $skill)
+                                    <span class="ml-3">{{$skill->name}}</span>
+                                @endforeach
+                                </div>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <a class="" href="{{ route('users/edit', $user->id) }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
