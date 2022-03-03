@@ -47,7 +47,7 @@
                         <p class="mb-1">Position</p>
                         <select class="w-100 @error('position_id') is-invalid @enderror" name="position_id" id="position_id" required>
                             @foreach($positions as $position)
-                                <option value="{{$position->id}}">{{ $position->name }}</option>
+                                <option value="{{$position->id}}" {{$user->position_id == $position->id ? 'selected' : ''}}>{{ $position->name }}</option>
                             @endforeach
                         </select>
 
@@ -93,6 +93,9 @@
         VirtualSelect.init({
             ele: '#skills',
             multiple: true,
+            selectedValue: 2,
         });
+
+        document.querySelector('#skills').setValue({{$user->skills->pluck('id')}});
     </script>
 @endpush
