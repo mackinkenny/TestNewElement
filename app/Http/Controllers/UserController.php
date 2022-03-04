@@ -87,18 +87,13 @@ class UserController extends Controller
             $query ->orderBy($sort, 'desc');
         })->where(function ($query) use ($search) {
             $query->where('name', 'like', '%'.$search."%")
+                ->orWhere('email', 'like', '%'.$search."%")
                 ->orWhereHas('position', function ($pos) use ($search){
                     $pos->where('name', 'like', '%'.$search."%");
                 })->orWhereHas('skills', function ($skl) use ($search) {
                     $skl->where('name', 'like', '%'.$search.'%');
                 });
         });
-
-        if (Auth::check()) {
-            $users = $users->where(function ($query) use ($search) {
-                $query->Where('email', 'like', '%'.$search."%");
-            });
-        }
 
         if ($position)
         {

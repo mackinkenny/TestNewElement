@@ -10,7 +10,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    use EncryptedAttribute;
 
     /**
      * The attributes that are mass assignable.
@@ -39,14 +38,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The attributes that should be encrypted on save.
-     *
-     * @var array
-     */
-    protected $encryptable = [
-        'name', 'phone'
-    ];
 
 
     public function position() {
