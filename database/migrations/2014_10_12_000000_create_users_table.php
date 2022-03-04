@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id');
             $table->integer('position_id')->nullable();
             $table->string('password');
+            $table->dateTime('last_seen')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

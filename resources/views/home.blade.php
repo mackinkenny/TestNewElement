@@ -68,28 +68,28 @@
         function setSort(code){
             code.target.value == 'none' ? sort = '' : sort = code.target.value;
             console.log(sort, position, skill, search);
-            fetchProductions(sort, position, skill, search)
+            fetchEmployees(sort, position, skill, search)
         }
 
         function setPosition(code) {
             code.target.value == 'none' ? position = '' : position = code.target.value;
 
-            fetchProductions(sort, position, skill, search)
+            fetchEmployees(sort, position, skill, search)
         }
 
         function setSkill(code) {
             code.target.value == 'none' ? skill = '' : skill = code.target.value;
 
-            fetchProductions(sort, position, skill, search)
+            fetchEmployees(sort, position, skill, search)
         }
 
         function setSearch(code) {
             code.target.value == 'none' ? search = '' : search = code.target.value;
 
-            fetchProductions(sort, position, skill, search)
+            fetchEmployees(sort, position, skill, search)
         }
 
-        function fetchProductions(sort, position, skill, search) {
+        function fetchEmployees(sort, position, skill, search) {
             $.ajax({
                 url: '{{ route('users/filter') }}',
                 data: {
@@ -105,6 +105,6 @@
                 }
             })
         }
-        fetchProductions(sort, position, skill, search);
+        fetchEmployees(sort, position, skill, search);
     </script>
 @endpush

@@ -9,7 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use phpDocumentor\Reflection\DocBlock\Description;
@@ -115,5 +117,20 @@ class UserController extends Controller
                 'users' => $users,
             ])->render(),
         ]);
+    }
+
+
+    /**
+     * Show user online status.
+     */
+    public function userOnlineStatus()
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            if (Cache::has('user-is-online-' . $user->id))
+                echo $user->name . " is online. Last seen: " . Carbon::parse($user->last_seen)->diffForHumans() . " <br>";
+            else
+                echo $user->name . " is offline. Last seen: " . Carbon::parse($user->last_seen)->diffForHumans() . " <br>";
+        }
     }
 }

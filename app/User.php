@@ -45,7 +45,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $encryptable = [
-        'name', 'email', 'phone'
+        'name', 'phone'
     ];
 
 
